@@ -4,7 +4,6 @@ const HTMLWebPackPlugin = require('html-webpack-plugin');
 /* const CopyWebPackPlugin = require('copy-webpack-plugin'); */
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-const ESLintPlugin = require('eslint-webpack-plugin');
 
 module.exports = (env, options) => {
   const isDevelopment = options.mode === 'development';
@@ -19,12 +18,18 @@ module.exports = (env, options) => {
         template: path.resolve(__dirname, 'src/index.html'),
         favicon: path.resolve(__dirname, 'src/assets/icons/keyboard-icon.ico'),
       }),
-      // new CopyWebPackPlugin(),
+      /* new CopyWebPackPlugin({
+        patterns: [
+          {
+            from: path.resolve(__dirname, './src/assets/fonts'),
+            to: 'fonts'
+          }
+        ]
+      }), */
       new MiniCssExtractPlugin({
         filename: '[name].[hash].css',
       }),
       new CleanWebpackPlugin(),
-      new ESLintPlugin({ extensions: 'js' }),
     ],
     module: {
       rules: [
@@ -42,11 +47,11 @@ module.exports = (env, options) => {
         },
         {
           test: /\.(woff|woff2|ttf|eot)$/,
-          use: 'asset/resource',
+          type: 'asset/resource',
         },
         {
           test: /\.(ico|jpg|png|svg|jpeg|gif|webp)$/,
-          use: 'asset/resource',
+          type: 'asset/resource',
         },
       ],
     },

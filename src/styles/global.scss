@@ -1,0 +1,26 @@
+body {
+  display: flex;
+  flex-direction: column;
+  background-color: $background;
+  color: $main-color;
+  font-family: 'Gilroy';
+}
+.header, .footer {
+  min-height: 70px;
+}
+.main {
+  flex: 1 0 auto;
+}
+.container {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 30px;
+}
+.header {
+  &__title {
+    font-size: 30px;
+    font-weight: 400;
+  }
+}
