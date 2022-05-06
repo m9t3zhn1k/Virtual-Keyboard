@@ -1,9 +1,10 @@
 const path = require('path');
 
 const HTMLWebPackPlugin = require('html-webpack-plugin');
-const CopyWebPackPlugin = require('copy-webpack-plugin');
+/* const CopyWebPackPlugin = require('copy-webpack-plugin'); */
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const ESLintPlugin = require('eslint-webpack-plugin');
 
 module.exports = (env, options) => {
   const isDevelopment = options.mode === 'development';
@@ -11,18 +12,19 @@ module.exports = (env, options) => {
     entry: path.resolve(__dirname, 'src/index.js'),
     output: {
       path: path.resolve(__dirname, 'dist'),
-      filename: '[name].bundle.js'
+      filename: '[name].bundle.js',
     },
     plugins: [
       new HTMLWebPackPlugin({
         template: path.resolve(__dirname, 'src/index.html'),
-        favicon: path.resolve(__dirname, 'src/assets/icons/keyboard-icon.ico')
+        favicon: path.resolve(__dirname, 'src/assets/icons/keyboard-icon.ico'),
       }),
-      //new CopyWebPackPlugin(),
+      // new CopyWebPackPlugin(),
       new MiniCssExtractPlugin({
-        filename: '[name].[hash].css'
+        filename: '[name].[hash].css',
       }),
       new CleanWebpackPlugin(),
+      new ESLintPlugin({ extensions: 'js' }),
     ],
     module: {
       rules: [
@@ -31,20 +33,20 @@ module.exports = (env, options) => {
           use: [
             isDevelopment ? 'style-loader' : MiniCssExtractPlugin.loader,
             'css-loader',
-            'sass-loader'
-          ]
+            'sass-loader',
+          ],
         },
         {
           test: /\.html$/,
-          use: 'html-loader'
+          use: 'html-loader',
         },
         {
           test: /\.(woff|woff2|ttf|eot)$/,
-          use: 'asset/resource'
+          use: 'asset/resource',
         },
         {
           test: /\.(ico|jpg|png|svg|jpeg|gif|webp)$/,
-          use: 'asset/resource'
+          use: 'asset/resource',
         },
       ],
     },
@@ -55,5 +57,5 @@ module.exports = (env, options) => {
       }, */
       port: 8888,
     },
-  }
-}
+  };
+};

@@ -1,1 +1,5 @@
-console.log(document.body.textContent);
+class App {
+  constructor() {
+
+  }
+}
