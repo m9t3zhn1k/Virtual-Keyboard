@@ -9,6 +9,7 @@
   cursor: pointer;
   padding: 10px 5px;
   border: 2px solid $main-dark;
+  transition: all 0.15s;
   & > span {
     font-size: 20px;
     line-height: 36px;
@@ -26,5 +27,12 @@
   }
   &.Space {
     width: 490px;
+  }
+  &.Backspace, &.CapsLock, &.ShiftLeft, &.Tab, &.Delete, &.Enter, &.ArrowUp, &.ShiftRight, &.ControlLeft, &.MetaLeft, &.AltLeft, &.AltRight, &.ArrowLeft, &.ArrowDown, &.ArrowRight, &.ControlRight {
+    background-color: $main-light-spec;
+  }
+  &:hover {
+    background-color: $white;
+    border: 2px solid $white;
   }
 }
