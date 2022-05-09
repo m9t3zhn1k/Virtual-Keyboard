@@ -1,0 +1,30 @@
+.keyboard__key {
+  height: 60px;
+  width: 60px;
+  border-radius: 6px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: $main-light;
+  cursor: pointer;
+  padding: 10px 5px;
+  border: 2px solid $main-dark;
+  & > span {
+    font-size: 20px;
+    line-height: 36px;
+    font-weight: 700;
+    user-select: none;
+  }
+  &.Backspace, &.CapsLock, &.ShiftLeft {
+    width: 150px;
+  }
+  &.Tab, &.Delete {
+    width: 70px;
+  }
+  &.Enter, &.ShiftRight {
+    width: 128px;
+  }
+  &.Space {
+    width: 490px;
+  }
+}

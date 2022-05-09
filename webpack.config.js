@@ -57,9 +57,6 @@ module.exports = (env, options) => {
     },
     devtool: 'source-map',
     devServer: {
-      /* static: {
-        directory: path.resolve(__dirname, 'src/index.html'),
-      }, */
       port: 8888,
     },
   };

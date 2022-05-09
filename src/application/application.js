@@ -1,10 +1,15 @@
-import HTML from './application.html';
+import AppHTML from './application.html';
 import '../styles/styles.scss';
-
-document.body.innerHTML = HTML;
+import Keyboard from './components/keyboard/Keyboard';
 
 export default class Application {
+  innerHTML = AppHTML;
   constructor() {
-    this.innerHTML = HTML;
+    setTimeout(this.addKeyboard, 0);
+  }
+  addKeyboard = () => {
+    this.container = document.querySelector('.main > .container');
+    const keyboard = new Keyboard().createKeyboard();
+    this.container.append(keyboard);
   }
 }
