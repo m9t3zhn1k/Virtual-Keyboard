@@ -1,6 +1,6 @@
 import AppHTML from './application.html';
 import '../styles/styles.scss';
-import Keyboard from './components/keyboard/Keyboard.js';
+import Keyboard from './components/keyboard/Keyboard';
 
 export default class Application {
   innerHTML = AppHTML;

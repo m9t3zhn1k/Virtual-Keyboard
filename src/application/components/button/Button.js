@@ -1,4 +1,4 @@
-import { keyCodes } from '../keyboard/keyCodes.js';
+import keyCodes from '../keyboard/keyCodes';
 
 export default class Button {
   constructor(index) {

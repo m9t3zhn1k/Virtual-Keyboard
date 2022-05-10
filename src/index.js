@@ -1,4 +1,4 @@
-import Application from './application/application.js';
+import Application from './application/application';
 
 const root = document.getElementById('root');
 

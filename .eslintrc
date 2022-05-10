@@ -9,9 +9,7 @@
       "node": true
   },
   "rules": {
-    "import/extensions": ["error", "always"],
-    "linebreak-style": ["error", "windows"],
-    "import/prefer-default-export": "off"
+    "linebreak-style": ["error", "windows"]
   },
   "extends": ["airbnb-base"]
 }
