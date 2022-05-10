@@ -13,14 +13,15 @@ export default class Keyboard {
 
   keyboard;
 
-  constructor() {
+  constructor(textarea) {
     this.addEventListeners();
+    this.textarea = textarea;
   }
 
   addEventListeners = () => {
     window.addEventListener('keydown', this.animatePressedButton);
-    window.addEventListener('keyup', this.animateUnpressedButton);
     window.addEventListener('mousedown', this.animatePressedButton);
+    window.addEventListener('keyup', this.animateUnpressedButton);
     window.addEventListener('mouseup', this.animateUnpressedButton);
     window.addEventListener('mouseout', this.animateUnpressedButton);
   };
@@ -89,31 +90,75 @@ export default class Keyboard {
     } else if (event.type === 'mousedown') {
       button = event.target.closest('.keyboard__key');
     }
-    if (button && !event.repeat) {
-      if (button.classList.contains('CapsLock') && button.classList.contains('active')) {
-        event.preventDefault();
-        button.classList.remove('active');
-        this.isCaps = false;
-        this.updateKeyboard();
-        return;
-      }
-      if (button.classList.contains('CapsLock')) {
-        this.isCaps = true;
-      }
-      if (button.classList.contains('ShiftLeft') || button.classList.contains('ShiftRight')) {
-        this.isShift = true;
-      }
+    if (button) {
       event.preventDefault();
-      button.classList.add('active');
-      const isControlLeft = this.keyboard.querySelector('.ControlLeft').classList.contains('active');
-      const isControlRight = this.keyboard.querySelector('.ControlRight').classList.contains('active');
-      const isAltLeft = this.keyboard.querySelector('.AltLeft').classList.contains('active');
-      const isAltRight = this.keyboard.querySelector('.AltRight').classList.contains('active');
-      if (((isControlLeft || isControlRight) && (isAltRight || isAltLeft)) && !event.repeat) {
-        this.lang = this.lang === 'en' ? 'ru' : 'en';
-        localStorage.setItem('lang', this.lang);
+      this.writeChar(button);
+      if (!event.repeat) {
+        if (button.classList.contains('CapsLock') && button.classList.contains('active')) {
+          button.classList.remove('active');
+          this.isCaps = false;
+          this.updateKeyboard();
+          return;
+        }
+        if (button.classList.contains('CapsLock')) {
+          this.isCaps = true;
+        }
+        if (button.classList.contains('ShiftLeft') || button.classList.contains('ShiftRight')) {
+          this.isShift = true;
+        }
+        button.classList.add('active');
+        const isControlLeft = this.keyboard.querySelector('.ControlLeft').classList.contains('active');
+        const isControlRight = this.keyboard.querySelector('.ControlRight').classList.contains('active');
+        const isAltLeft = this.keyboard.querySelector('.AltLeft').classList.contains('active');
+        const isAltRight = this.keyboard.querySelector('.AltRight').classList.contains('active');
+        if (((isControlLeft || isControlRight) && (isAltRight || isAltLeft)) && !event.repeat) {
+          this.lang = this.lang === 'en' ? 'ru' : 'en';
+          localStorage.setItem('lang', this.lang);
+        }
+        this.updateKeyboard();
       }
-      this.updateKeyboard();
+    }
+  };
+
+  writeChar = (button) => {
+    this.textarea.focus();
+    const char = button.firstElementChild.innerHTML;
+    const index = this.textarea.selectionStart;
+    if (char.length <= 1) {
+      this.textarea.value = `${this.textarea.value.slice(0, index)}${char}${this.textarea.value.slice(index)}`;
+      this.textarea.selectionStart = index + 1;
+      this.textarea.selectionEnd = index + 1;
+    }
+    if (char === '&amp;') {
+      this.textarea.value = `${this.textarea.value.slice(0, index)}&${this.textarea.value.slice(index)}`;
+      this.textarea.selectionStart = index + 1;
+      this.textarea.selectionEnd = index + 1;
+    }
+    if (char === 'Enter') {
+      this.textarea.value = `${this.textarea.value.slice(0, index)}\n${this.textarea.value.slice(index)}`;
+      this.textarea.selectionStart = index + 1;
+      this.textarea.selectionEnd = index + 1;
+    }
+    if (char === 'Tab') {
+      this.textarea.value = `${this.textarea.value.slice(0, index)}    ${this.textarea.value.slice(index)}`;
+      this.textarea.selectionStart = index + 1;
+      this.textarea.selectionEnd = index + 1;
+    }
+    if (char === 'Backspace') {
+      if (index > 0) {
+        const temp = this.textarea.value.slice(0, index - 1) + this.textarea.value.slice(index);
+        this.textarea.value = temp;
+        this.textarea.selectionStart = index - 1;
+        this.textarea.selectionEnd = index - 1;
+      }
+    }
+    if (char === 'Del') {
+      if (index < this.textarea.value.length) {
+        const temp = this.textarea.value.slice(0, index) + this.textarea.value.slice(index + 1);
+        this.textarea.value = temp;
+        this.textarea.selectionStart = index;
+        this.textarea.selectionEnd = index;
+      }
     }
   };
 
