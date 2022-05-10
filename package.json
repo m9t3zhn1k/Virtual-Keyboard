@@ -21,7 +21,6 @@
   "homepage": "https://github.com/m9t3zhn1k/Virtual-Keyboard#readme",
   "devDependencies": {
     "clean-webpack-plugin": "^4.0.0",
-    "copy-webpack-plugin": "^10.2.4",
     "css-loader": "^6.7.1",
     "eslint": "^8.14.0",
     "eslint-config-airbnb-base": "^15.0.0",

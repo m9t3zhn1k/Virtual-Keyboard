@@ -1,7 +1,6 @@
 const path = require('path');
 
 const HTMLWebPackPlugin = require('html-webpack-plugin');
-/* const CopyWebPackPlugin = require('copy-webpack-plugin'); */
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
@@ -18,14 +17,6 @@ module.exports = (env, options) => {
         template: path.resolve(__dirname, 'src/index.html'),
         favicon: path.resolve(__dirname, 'src/assets/icons/keyboard-icon.ico'),
       }),
-      /* new CopyWebPackPlugin({
-        patterns: [
-          {
-            from: path.resolve(__dirname, './src/assets/fonts'),
-            to: 'fonts'
-          }
-        ]
-      }), */
       new MiniCssExtractPlugin({
         filename: '[name].[hash].css',
       }),

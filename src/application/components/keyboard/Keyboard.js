@@ -141,8 +141,8 @@ export default class Keyboard {
     }
     if (char === 'Tab') {
       this.textarea.value = `${this.textarea.value.slice(0, index)}    ${this.textarea.value.slice(index)}`;
-      this.textarea.selectionStart = index + 1;
-      this.textarea.selectionEnd = index + 1;
+      this.textarea.selectionStart = index + 4;
+      this.textarea.selectionEnd = index + 4;
     }
     if (char === 'Backspace') {
       if (index > 0) {
