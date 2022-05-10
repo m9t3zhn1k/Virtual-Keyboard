@@ -1,5 +1,5 @@
 import { keyCodes } from '../keyboard/keyCodes.js';
-import { keyCharsSmallEn } from '../keyboard/keyCharsSmallEn.js';
+import { keyCharsSmallEn } from '../keyboard/keyChars.js';
 
 export default class Button {
   constructor(index) {
