@@ -26,6 +26,10 @@ body {
     margin: 0 0 45px;
   }
 }
+.description {
+  text-align: center;
+  line-height: 130%;
+}
 .textarea { 
   width: 100%;
   border: 1px solid $main-dark;
