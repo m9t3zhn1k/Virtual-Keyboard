@@ -144,14 +144,16 @@ export default class Keyboard {
     }
     if (char === 'Backspace') {
       if (index > 0) {
-        this.textarea.value = this.textarea.value.slice(0, index - 1) + this.textarea.value.slice(index);
+        const value = this.textarea.value.slice(0, index - 1) + this.textarea.value.slice(index);
+        this.textarea.value = value;
         this.textarea.selectionStart = index - 1;
         this.textarea.selectionEnd = index - 1;
       }
     }
     if (char === 'Del') {
       if (index < this.textarea.value.length) {
-        this.textarea.value = this.textarea.value.slice(0, index) + this.textarea.value.slice(index + 1);
+        const value = this.textarea.value.slice(0, index) + this.textarea.value.slice(index + 1);
+        this.textarea.value = value;
         this.textarea.selectionStart = index;
         this.textarea.selectionEnd = index;
       }
@@ -162,7 +164,7 @@ export default class Keyboard {
     this.textarea.value = `${this.textarea.value.slice(0, i)}${char}${this.textarea.value.slice(i)}`;
     this.textarea.selectionStart = i + j;
     this.textarea.selectionEnd = i + j;
-  }
+  };
 
   animateUnpressedButton = (event) => {
     let button;
