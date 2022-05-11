@@ -125,42 +125,44 @@ export default class Keyboard {
     const char = button.firstElementChild.innerHTML;
     const index = this.textarea.selectionStart;
     if (char.length <= 1) {
-      this.textarea.value = `${this.textarea.value.slice(0, index)}${char}${this.textarea.value.slice(index)}`;
-      this.textarea.selectionStart = index + 1;
-      this.textarea.selectionEnd = index + 1;
+      this.convertChar(char, index, 1);
+    }
+    if (char === '&lt;') {
+      this.convertChar('<', index, 1);
+    }
+    if (char === '&gt;') {
+      this.convertChar('>', index, 1);
     }
     if (char === '&amp;') {
-      this.textarea.value = `${this.textarea.value.slice(0, index)}&${this.textarea.value.slice(index)}`;
-      this.textarea.selectionStart = index + 1;
-      this.textarea.selectionEnd = index + 1;
+      this.convertChar('&', index, 1);
     }
     if (char === 'Enter') {
-      this.textarea.value = `${this.textarea.value.slice(0, index)}\n${this.textarea.value.slice(index)}`;
-      this.textarea.selectionStart = index + 1;
-      this.textarea.selectionEnd = index + 1;
+      this.convertChar('\n', index, 1);
     }
     if (char === 'Tab') {
-      this.textarea.value = `${this.textarea.value.slice(0, index)}    ${this.textarea.value.slice(index)}`;
-      this.textarea.selectionStart = index + 4;
-      this.textarea.selectionEnd = index + 4;
+      this.convertChar('    ', index, 4);
     }
     if (char === 'Backspace') {
       if (index > 0) {
-        const temp = this.textarea.value.slice(0, index - 1) + this.textarea.value.slice(index);
-        this.textarea.value = temp;
+        this.textarea.value = this.textarea.value.slice(0, index - 1) + this.textarea.value.slice(index);
         this.textarea.selectionStart = index - 1;
         this.textarea.selectionEnd = index - 1;
       }
     }
     if (char === 'Del') {
       if (index < this.textarea.value.length) {
-        const temp = this.textarea.value.slice(0, index) + this.textarea.value.slice(index + 1);
-        this.textarea.value = temp;
+        this.textarea.value = this.textarea.value.slice(0, index) + this.textarea.value.slice(index + 1);
         this.textarea.selectionStart = index;
         this.textarea.selectionEnd = index;
       }
     }
   };
+
+  convertChar = (char, i, j) => {
+    this.textarea.value = `${this.textarea.value.slice(0, i)}${char}${this.textarea.value.slice(i)}`;
+    this.textarea.selectionStart = i + j;
+    this.textarea.selectionEnd = i + j;
+  }
 
   animateUnpressedButton = (event) => {
     let button;
