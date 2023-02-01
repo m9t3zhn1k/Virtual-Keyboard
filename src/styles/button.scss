@@ -1,0 +1,44 @@
+.keyboard__key {
+  height: 60px;
+  width: 60px;
+  border-radius: 6px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: $main-light;
+  cursor: pointer;
+  padding: 10px 5px;
+  border: 2px solid $main-dark;
+  transition: all 0.15s;
+  & > span {
+    font-size: 20px;
+    line-height: 36px;
+    font-weight: 700;
+    user-select: none;
+  }
+  &.Backspace, &.CapsLock, &.ShiftLeft {
+    width: 150px;
+  }
+  &.Tab, &.Delete {
+    width: 70px;
+  }
+  &.Enter, &.ShiftRight {
+    width: 128px;
+  }
+  &.Space {
+    width: 490px;
+  }
+  &.Backspace, &.CapsLock, &.ShiftLeft, &.Tab, &.Delete, &.Enter, &.ArrowUp, &.ShiftRight, &.ControlLeft, &.MetaLeft, &.AltLeft, &.AltRight, &.ArrowLeft, &.ArrowDown, &.ArrowRight, &.ControlRight {
+    background-color: $main-light-spec;
+  }
+  &:hover {
+    background-color: $white;
+    border: 2px solid $white;
+  }
+  &.active {
+    background-color: $white;
+    border: 2px solid $white;
+    transform: scale(0.9);
+    color: $main-light-spec;
+  }
+}
